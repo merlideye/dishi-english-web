@@ -1,0 +1,1268 @@
+{
+  "id": "kaoyan-six-day-advanced-2026-10-25",
+  "title": "六天考研进阶词汇",
+  "version": "2026.10.25-2",
+  "generatedAt": "2026-10-25T03:08:13.021631+00:00",
+  "description": "六组 CET6/考研层词汇，每天 8 个；用于 2026-10-25 起六天的学习内容。",
+  "license": {
+    "name": "MIT",
+    "url": "https://github.com/skywind3000/ECDICT/blob/master/LICENSE",
+    "note": "ECDICT 仓库标注为 MIT；其词义数据的历史来源仍应保留来源说明。"
+  },
+  "attribution": "Definitions, phonetics, word forms, and frequency annotations derived from ECDICT.",
+  "items": [
+    {
+      "id": "ecdict:eliminate",
+      "word": "eliminate",
+      "phonetic": "i'limineit",
+      "meaning": "vt. 除去, 排除, 剔除, 消除",
+      "definition": "v. kill in large numbers",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading",
+        "writing"
+      ],
+      "exchange": "d:eliminated/i:eliminating/3:eliminates/p:eliminated",
+      "frequencyRank": 1838,
+      "studyDay": 1,
+      "daySequence": 1,
+      "sequence": 1,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:variable",
+      "word": "variable",
+      "phonetic": "'vєәriәbl",
+      "meaning": "n. 易变的事物, 变数, 可变物, 变量\na. 可变的, 不定的, 易变的, 变量的",
+      "definition": "n. something that is likely to vary; something that is subject to variation",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:variables",
+      "frequencyRank": 1862,
+      "studyDay": 1,
+      "daySequence": 2,
+      "sequence": 2,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:perception",
+      "word": "perception",
+      "phonetic": "pә'sepʃәn",
+      "meaning": "n. 知觉, 感觉, 领悟力, 获取\n[医] 知觉",
+      "definition": "n. a way of conceiving something",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:perceptions",
+      "frequencyRank": 1866,
+      "studyDay": 1,
+      "daySequence": 3,
+      "sequence": 3,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:implement",
+      "word": "implement",
+      "phonetic": "'implimәnt",
+      "meaning": "n. 工具, 器具, 手段\nvt. 实现, 使生效, 执行",
+      "definition": "n. instrumentation (a piece of equipment or tool) used to effect an end",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading",
+        "writing"
+      ],
+      "exchange": "d:implemented/i:implementing/s:implements/3:implements/p:implemented",
+      "frequencyRank": 2285,
+      "studyDay": 1,
+      "daySequence": 4,
+      "sequence": 4,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:illustrate",
+      "word": "illustrate",
+      "phonetic": "'ilәstreit",
+      "meaning": "vt. 举例说明, 作图解, 阐明\nvi. 举例说明",
+      "definition": "v. depict with an illustration",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "d:illustrated/3:illustrates/i:illustrating/p:illustrated",
+      "frequencyRank": 2348,
+      "studyDay": 1,
+      "daySequence": 5,
+      "sequence": 5,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:mechanism",
+      "word": "mechanism",
+      "phonetic": "'mekәnizm",
+      "meaning": "n. 机械, 机构, 结构, 机理, 技巧\n[化] 机理; 历程; 机构",
+      "definition": "n. the atomic process that occurs during a chemical reaction",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:mechanisms",
+      "frequencyRank": 2677,
+      "studyDay": 1,
+      "daySequence": 6,
+      "sequence": 6,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:resistance",
+      "word": "resistance",
+      "phonetic": "ri'zistәns",
+      "meaning": "n. 抵抗力, 反抗, 耐力, 阻力, 电阻\n[化] 抵抗; 抗性; 阻力; 抗药性; 电阻",
+      "definition": "n. the action of opposing something that you disapprove or disagree with",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:resistances",
+      "frequencyRank": 2226,
+      "studyDay": 1,
+      "daySequence": 7,
+      "sequence": 7,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:exposure",
+      "word": "exposure",
+      "phonetic": "ik'spәuʒә",
+      "meaning": "n. 暴露, 揭发, 揭露\n[化] 曝光量; 照射; 照射量",
+      "definition": "n. vulnerability to the elements; to the action of heat or cold or wind or rain;",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:exposures",
+      "frequencyRank": 2229,
+      "studyDay": 1,
+      "daySequence": 8,
+      "sequence": 8,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:substantial",
+      "word": "substantial",
+      "phonetic": "sәb'stænʃәl",
+      "meaning": "n. 重要材料(或事物), 有实际价值的东西\na. 实质上的, 物质的, 有内容的, 结实的",
+      "definition": "s. having a firm basis in reality and being therefore important, meaningful, or considerable",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading",
+        "writing"
+      ],
+      "exchange": "",
+      "frequencyRank": 2544,
+      "studyDay": 2,
+      "daySequence": 1,
+      "sequence": 9,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:incorporate",
+      "word": "incorporate",
+      "phonetic": "in'kɒ:pәreit",
+      "meaning": "a. 合并的, 组成公司的, 一体化的\nvt. 吸收, 合并, 使组成公司, 体现",
+      "definition": "v. include or contain; have as a component",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "d:incorporated/i:incorporating/3:incorporates/p:incorporated",
+      "frequencyRank": 2600,
+      "studyDay": 2,
+      "daySequence": 2,
+      "sequence": 10,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:interpret",
+      "word": "interpret",
+      "phonetic": "in'tә:prit",
+      "meaning": "vt. 解释, 演出, 翻译, 理解\nvi. 翻译, 解释",
+      "definition": "v. make sense of; assign a meaning to",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "d:interpreted/i:interpreting/p:interpreted/3:interprets",
+      "frequencyRank": 2755,
+      "studyDay": 2,
+      "daySequence": 3,
+      "sequence": 11,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:comprehensive",
+      "word": "comprehensive",
+      "phonetic": ".kɒmpri'hensiv",
+      "meaning": "a. 广泛的, 有理解力的, 综合的\n[经] 广泛的, 综合的, 全面的",
+      "definition": "a. including all or everything",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:comprehensives",
+      "frequencyRank": 2896,
+      "studyDay": 2,
+      "daySequence": 4,
+      "sequence": 12,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:implication",
+      "word": "implication",
+      "phonetic": ".impli'keiʃәn",
+      "meaning": "n. 牵连, 含义, 暗示\n[法] 推断, 含蓄之意, 暗示",
+      "definition": "n. an accusation that brings into intimate and usually incriminating connection",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:implications",
+      "frequencyRank": 2434,
+      "studyDay": 2,
+      "daySequence": 5,
+      "sequence": 13,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:incentive",
+      "word": "incentive",
+      "phonetic": "in'sentiv",
+      "meaning": "n. 动机\na. 激励的",
+      "definition": "n. a positive motivational influence",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:incentives",
+      "frequencyRank": 2726,
+      "studyDay": 2,
+      "daySequence": 6,
+      "sequence": 14,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:justify",
+      "word": "justify",
+      "phonetic": "'dʒʌstifai",
+      "meaning": "vt. 替...辩护, 证明\nvi. 证明合法",
+      "definition": "v. show to be reasonable or provide adequate ground for",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading",
+        "writing"
+      ],
+      "exchange": "d:justified/3:justifies/i:justifying/p:justified",
+      "frequencyRank": 2834,
+      "studyDay": 2,
+      "daySequence": 7,
+      "sequence": 15,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:insight",
+      "word": "insight",
+      "phonetic": "'insait",
+      "meaning": "n. 察看, 洞察力, 见识\n[医] 自知力, 洞察, 顿悟",
+      "definition": "n. a feeling of understanding",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:insights",
+      "frequencyRank": 2840,
+      "studyDay": 2,
+      "daySequence": 8,
+      "sequence": 16,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:characterize",
+      "word": "characterize",
+      "phonetic": "'kærәktәraiz",
+      "meaning": "vt. 描绘...的特性, 刻划...的性格",
+      "definition": "v. be characteristic of",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "d:characterized/p:characterized/3:characterizes/i:characterizing",
+      "frequencyRank": 2859,
+      "studyDay": 3,
+      "daySequence": 1,
+      "sequence": 17,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:controversy",
+      "word": "controversy",
+      "phonetic": "'kɒntrәvә:si",
+      "meaning": "n. 论争, 辩论, 论战, 争论\n[法] 论战, 争论, 争吵",
+      "definition": "n. a contentious speech act; a dispute where there is strong disagreement",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:controversies",
+      "frequencyRank": 2876,
+      "studyDay": 3,
+      "daySequence": 2,
+      "sequence": 18,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:constitute",
+      "word": "constitute",
+      "phonetic": "kәn'stitjut",
+      "meaning": "vt. 构成, 组成, 任命\n[建] 构造, 组成",
+      "definition": "v. form or compose",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading",
+        "writing"
+      ],
+      "exchange": "3:constitutes/p:constituted/d:constituted/i:constituting",
+      "frequencyRank": 2887,
+      "studyDay": 3,
+      "daySequence": 3,
+      "sequence": 19,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:vulnerable",
+      "word": "vulnerable",
+      "phonetic": "'vʌlnәrәbl",
+      "meaning": "a. 易受伤害的, 有弱点的, 易受影响的, 脆弱的, 成局的\n[医] 易损的",
+      "definition": "a. susceptible to attack",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "",
+      "frequencyRank": 2955,
+      "studyDay": 3,
+      "daySequence": 4,
+      "sequence": 20,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:obligation",
+      "word": "obligation",
+      "phonetic": ".ɒbli'geiʃәn",
+      "meaning": "n. 义务, 责任, 约束, 契约, 恩惠, 债务\n[经] 待付款, 债务, 义务",
+      "definition": "n. the state of being obligated to do or pay something",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:obligations",
+      "frequencyRank": 2988,
+      "studyDay": 3,
+      "daySequence": 5,
+      "sequence": 21,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:anticipate",
+      "word": "anticipate",
+      "phonetic": "æn'tisipeit",
+      "meaning": "vt. 预期, 占先, 加速, 提前使用\n[医] 提前出现, 先期发生",
+      "definition": "v. act in advance of; deal with ahead of time",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading",
+        "writing"
+      ],
+      "exchange": "d:anticipated/i:anticipating/p:anticipated/3:anticipates",
+      "frequencyRank": 3187,
+      "studyDay": 3,
+      "daySequence": 6,
+      "sequence": 22,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:legitimate",
+      "word": "legitimate",
+      "phonetic": "li'dʒitimәt",
+      "meaning": "a. 合法的, 正当的, 婚生的\nvt. 认为正当, 立为嫡嗣, 使合法",
+      "definition": "v. show or affirm to be just and legitimate",
+      "tags": [
+        "cet6",
+        "ky",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "i:legitimating/p:legitimated/3:legitimates/d:legitimated",
+      "frequencyRank": 3195,
+      "studyDay": 3,
+      "daySequence": 7,
+      "sequence": 23,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:distinct",
+      "word": "distinct",
+      "phonetic": "dis'tiŋkt",
+      "meaning": "a. 清楚的, 显著的, 不同的",
+      "definition": "s. (often followed by `from') not alike; different in nature or quality",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "",
+      "frequencyRank": 3254,
+      "studyDay": 3,
+      "daySequence": 8,
+      "sequence": 24,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:discourse",
+      "word": "discourse",
+      "phonetic": "'diskɒ:s",
+      "meaning": "n. 谈话, 演讲\nvi. 谈话, 讲述",
+      "definition": "n. extended verbal expression in speech or writing",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:discourses/i:discoursing/p:discoursed/3:discourses/d:discoursed",
+      "frequencyRank": 3253,
+      "studyDay": 4,
+      "daySequence": 1,
+      "sequence": 25,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:moderate",
+      "word": "moderate",
+      "phonetic": "'mɒdәrәt",
+      "meaning": "a. 适度的, 稳健的, 中等的, 节制的\nvt. 节制, 减轻, 使缓和",
+      "definition": "v. preside over",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:moderates/d:moderated/p:moderated/i:moderating/3:moderates",
+      "frequencyRank": 3264,
+      "studyDay": 4,
+      "daySequence": 2,
+      "sequence": 26,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:subsequent",
+      "word": "subsequent",
+      "phonetic": "'sʌbsikwәnt",
+      "meaning": "a. 后来的, 接下去的\n[经] 后来的",
+      "definition": "a. following in time or order",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading",
+        "writing"
+      ],
+      "exchange": "",
+      "frequencyRank": 3267,
+      "studyDay": 4,
+      "daySequence": 3,
+      "sequence": 27,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:portray",
+      "word": "portray",
+      "phonetic": "pɒ:'trei",
+      "meaning": "vt. 描绘, 描写, 描绘...的肖像",
+      "definition": "v. portray in words",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "d:portrayed/3:portrays/i:portraying/p:portrayed",
+      "frequencyRank": 3263,
+      "studyDay": 4,
+      "daySequence": 4,
+      "sequence": 28,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:considerable",
+      "word": "considerable",
+      "phonetic": "kәn'sidәrәbl",
+      "meaning": "a. 相当的, 可观的, 重要的",
+      "definition": "a. large or relatively large in number or amount or extent or degree",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading",
+        "writing"
+      ],
+      "exchange": "",
+      "frequencyRank": 2855,
+      "studyDay": 4,
+      "daySequence": 5,
+      "sequence": 29,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:intellectual",
+      "word": "intellectual",
+      "phonetic": ".intә'lektʃuәl",
+      "meaning": "n. 有知识者, 知识分子, 凭理智做事者\na. 智力的, 用脑力的, 聪明的",
+      "definition": "n. a person who uses the mind creatively",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:intellectuals",
+      "frequencyRank": 2857,
+      "studyDay": 4,
+      "daySequence": 6,
+      "sequence": 30,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:external",
+      "word": "external",
+      "phonetic": "ik'stә:nl",
+      "meaning": "n. 外部, 外面\na. 外部的, 客观的, 表面的",
+      "definition": "n. outward features",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:externals",
+      "frequencyRank": 2864,
+      "studyDay": 4,
+      "daySequence": 7,
+      "sequence": 31,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:variation",
+      "word": "variation",
+      "phonetic": ".vєәri'eiʃәn",
+      "meaning": "n. 变更, 变化, 变种, 变奏\n[医] 变异, 变易; 变度",
+      "definition": "n. an instance of change; the rate or magnitude of change",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:variations",
+      "frequencyRank": 2927,
+      "studyDay": 4,
+      "daySequence": 8,
+      "sequence": 32,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:coherent",
+      "word": "coherent",
+      "phonetic": "kәu'hiәrәnt",
+      "meaning": "a. 互相耦合的, 清晰的, 明了的，凝聚性的, 连贯的",
+      "definition": "a. marked by an orderly, logical, and aesthetically consistent relation of parts",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "",
+      "frequencyRank": 7004,
+      "studyDay": 5,
+      "daySequence": 1,
+      "sequence": 33,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:empirical",
+      "word": "empirical",
+      "phonetic": "em'pirikәl",
+      "meaning": "a. 完全跟据经验的, 经验主义的\n[医] 经验主义的",
+      "definition": "a. derived from experiment and observation rather than theory",
+      "tags": [
+        "cet6",
+        "ky",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:empiricals",
+      "frequencyRank": 5285,
+      "studyDay": 5,
+      "daySequence": 2,
+      "sequence": 34,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:intrinsic",
+      "word": "intrinsic",
+      "phonetic": "in'trinsik",
+      "meaning": "a. 本质的, 原有的, 真正的\n[医] 内部的, 内在的",
+      "definition": "a. belonging to a thing by its very nature",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:intrinsics",
+      "frequencyRank": 7449,
+      "studyDay": 5,
+      "daySequence": 3,
+      "sequence": 35,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:undermine",
+      "word": "undermine",
+      "phonetic": ".ʌndә'main",
+      "meaning": "vt. 在...下面挖, 渐渐破坏, 暗地里破坏\n[法] 暗中破坏, 以阴谋中伤伤害",
+      "definition": "v destroy property or hinder normal operations",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading",
+        "writing"
+      ],
+      "exchange": "d:undermined/i:undermining/3:undermines/p:undermined",
+      "frequencyRank": 3697,
+      "studyDay": 5,
+      "daySequence": 4,
+      "sequence": 36,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:facilitate",
+      "word": "facilitate",
+      "phonetic": "fә'siliteit",
+      "meaning": "vt. 使容易, 促进, 帮助\n[法] 使容易, 使便利, 推进",
+      "definition": "v. make easier",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading",
+        "writing"
+      ],
+      "exchange": "d:facilitated/3:facilitates/i:facilitating/p:facilitated",
+      "frequencyRank": 3568,
+      "studyDay": 5,
+      "daySequence": 5,
+      "sequence": 37,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:discrepancy",
+      "word": "discrepancy",
+      "phonetic": "dis'krepәnsi",
+      "meaning": "n. 不符合, 差异, 不相符之处\n[化] 不符值; 偏差值",
+      "definition": "n. a difference between conflicting facts or claims or opinions",
+      "tags": [
+        "cet6",
+        "ky",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:discrepancies",
+      "frequencyRank": 6872,
+      "studyDay": 5,
+      "daySequence": 6,
+      "sequence": 38,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:infer",
+      "word": "infer",
+      "phonetic": "in'fә:",
+      "meaning": "vt. 推论出, 推断\nvi. 作推论",
+      "definition": "v reason by deduction; establish by deduction",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "d:inferred/i:inferring/3:infers/p:inferred",
+      "frequencyRank": 9219,
+      "studyDay": 5,
+      "daySequence": 7,
+      "sequence": 39,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:prevalent",
+      "word": "prevalent",
+      "phonetic": "'prevәlәnt",
+      "meaning": "a. 普遍的, 流行的",
+      "definition": "s most frequent or common",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "",
+      "frequencyRank": 6987,
+      "studyDay": 5,
+      "daySequence": 8,
+      "sequence": 40,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:scrutiny",
+      "word": "scrutiny",
+      "phonetic": "'skru:tini",
+      "meaning": "n. 细看, 仔细检查, 监视, 选票检查\n[经] 复查, 评核, 仔细检查",
+      "definition": "n. a prolonged intense look",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:scrutinies",
+      "frequencyRank": 4964,
+      "studyDay": 6,
+      "daySequence": 1,
+      "sequence": 41,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:plausible",
+      "word": "plausible",
+      "phonetic": "'plɒ:zibl",
+      "meaning": "a. 貌似真实的, 貌似合理的, 说得煞有其事的\n[法] 花言巧语的, 似乎有理的",
+      "definition": "a. apparently reasonable and valid, and truthful",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "",
+      "frequencyRank": 7125,
+      "studyDay": 6,
+      "daySequence": 2,
+      "sequence": 42,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:bias",
+      "word": "bias",
+      "phonetic": "'baiәs",
+      "meaning": "n. 偏见, 斜纹\na. 偏斜的",
+      "definition": "n. a partiality that prevents objective consideration of an issue or situation",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "d:biased/p:biased/i:biassing/3:biases",
+      "frequencyRank": 3925,
+      "studyDay": 6,
+      "daySequence": 3,
+      "sequence": 43,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:sustain",
+      "word": "sustain",
+      "phonetic": "sә'stein",
+      "meaning": "vt. 承受, 支持, 供养, 继续, 忍受, 蒙受, 证实, 准许\n[电] 持续",
+      "definition": "v. supply with necessities and support",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading",
+        "writing"
+      ],
+      "exchange": "d:sustained/i:sustaining/p:sustained/3:sustains",
+      "frequencyRank": 2986,
+      "studyDay": 6,
+      "daySequence": 4,
+      "sequence": 44,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:perspective",
+      "word": "perspective",
+      "phonetic": "pә'spektiv",
+      "meaning": "n. 远景, 透视感, (观察问题的)视角, 透视法, 看法, 透视图\na. 透视的, 透视法的",
+      "definition": "n. the appearance of things relative to one another as determined by their distance from the viewer",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "s:perspectives",
+      "frequencyRank": 1412,
+      "studyDay": 6,
+      "daySequence": 5,
+      "sequence": 45,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:confront",
+      "word": "confront",
+      "phonetic": "kәn'frʌnt",
+      "meaning": "vt. 使面对, 对抗, 遭遇, 使对质, 比较\n[法] 对证, 使对质, 比较",
+      "definition": "v. oppose, as in hostility or a competition",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "d:confronted/i:confronting/p:confronted/3:confronts",
+      "frequencyRank": 2415,
+      "studyDay": 6,
+      "daySequence": 6,
+      "sequence": 46,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:phenomenon",
+      "word": "phenomenon",
+      "phonetic": "fi'nɒminәn",
+      "meaning": "n. 现象, 迹象, 表现, 奇迹, 奇才\n[化] 现象",
+      "definition": "n. any state or process known through the senses rather than by intuition or reasoning",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading",
+        "writing"
+      ],
+      "exchange": "s:phenomena",
+      "frequencyRank": 2466,
+      "studyDay": 6,
+      "daySequence": 7,
+      "sequence": 47,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    },
+    {
+      "id": "ecdict:dynamic",
+      "word": "dynamic",
+      "phonetic": "dai'næmik",
+      "meaning": "a. 动态的, 有活力的, 有力的, 动力的, 不断变化的\nn. 动力, 动态",
+      "definition": "a. characterized by action or forcefulness or force of personality",
+      "tags": [
+        "cet6",
+        "ky",
+        "toefl",
+        "ielts"
+      ],
+      "skills": [
+        "reading"
+      ],
+      "exchange": "",
+      "frequencyRank": 3978,
+      "studyDay": 6,
+      "daySequence": 8,
+      "sequence": 48,
+      "source": {
+        "name": "ECDICT",
+        "url": "https://github.com/skywind3000/ECDICT",
+        "license": "MIT (repository declaration)"
+      }
+    }
+  ]
+}

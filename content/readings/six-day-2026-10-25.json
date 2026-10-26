@@ -1,0 +1,418 @@
+{
+  "id": "six-day-open-reading-2026-10-25",
+  "title": "六天分级阅读包",
+  "version": "2026.10.25-1",
+  "generatedAt": "2026-10-25T02:50:03.283214+00:00",
+  "description": "六篇由浅入深的开放许可阅读，配题目、文章结构、解题提醒和译文关键点。",
+  "license": {
+    "name": "CC BY-SA 4.0 / CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/",
+    "note": "每篇文章保留自己的来源和许可证，详见各条目。"
+  },
+  "attribution": "Articles adapted from Simple English Wikipedia and Our World in Data. Comprehension questions and study notes are original materials for this application.",
+  "items": [
+    {
+      "id": "simplewiki:artificial-intelligence:2026-10-24",
+      "title": "Artificial Intelligence",
+      "level": "foundation",
+      "topic": "technology",
+      "wordCount": 184,
+      "text": "Artificial intelligence (AI or A.I.) is a computer program or a machine that is able to learn and mimic human thinking. Sometimes the word AI is used to talk about neural networks or deep learning. Artificial intelligence is a system's ability to understand external data, to learn from that data, and to use what it has learned to achieve specific goals or tasks through adaptation. Artificial intelligence is widely applied in speech recognition, image recognition, robotics, autonomous systems, natural language processing, machine translation, predictive analytics, medical diagnostics, fraud detection, and the control of physical processes. John McCarthy came up with the name \"artificial intelligence\" in 1956. AI research started with a conference at Dartmouth College in 1956. It was a month-long brainstorming session attended by many people interested in AI. At the conference, they wrote programs which were able to beat humans at checkers or solve word problems. Later, faster computers and a focus on solving more specific problems helped AI become important again in data mining and medical diagnosis. In 1997, the chess computer Deep Blue became the first computer program to beat chess world champion Garry Kasparov.",
+      "author": "Simple English Wikipedia contributors",
+      "sourceUrl": "https://simple.wikipedia.org/wiki/Artificial_intelligence",
+      "accessedAt": "2026-10-24",
+      "license": "CC BY-SA 4.0 / GFDL",
+      "questions": [
+        {
+          "id": "ai-1",
+          "prompt": "What is artificial intelligence described as in the passage?",
+          "options": [
+            "A program or machine that can learn and mimic human thinking",
+            "A type of computer screen",
+            "A conference held every year",
+            "A machine that can only play chess"
+          ],
+          "answerIndex": 0,
+          "explanation": "The first sentence defines AI as a computer program or machine able to learn and mimic human thinking."
+        },
+        {
+          "id": "ai-2",
+          "prompt": "What happened at the Dartmouth College conference in 1956?",
+          "options": [
+            "Deep Blue won a chess match",
+            "Researchers wrote early AI programs",
+            "A law banned artificial intelligence",
+            "The first smartphone was invented"
+          ],
+          "answerIndex": 1,
+          "explanation": "The passage says that people at the conference wrote programs that could beat humans at checkers or solve word problems."
+        }
+      ],
+      "day": 1,
+      "analysis": {
+        "mainIdea": "人工智能是能够从数据中学习、适应并完成特定任务的系统，其应用范围已经非常广。",
+        "structure": [
+          "先给出人工智能的定义和核心能力。",
+          "列举应用领域，再介绍名称来源和研究历史。",
+          "最后说明算力提升带来的复兴以及 Deep Blue 的里程碑意义。"
+        ],
+        "questionTips": [
+          "定义题应回看第一句，不要把后文的应用例子误当成定义。",
+          "时间和人物题需要定位 in 1956、John McCarthy、Dartmouth 等信息。"
+        ]
+      },
+      "translationNotes": [
+        {
+          "source": "mimic human thinking",
+          "target": "模仿人类思维"
+        },
+        {
+          "source": "learn from external data",
+          "target": "从外部数据中学习"
+        },
+        {
+          "source": "through adaptation",
+          "target": "通过适应过程"
+        },
+        {
+          "source": "became the first computer program to beat...",
+          "target": "成为第一个击败……的计算机程序"
+        }
+      ]
+    },
+    {
+      "id": "simplewiki:climate-change:2026-10-24",
+      "title": "Climate Change",
+      "level": "foundation",
+      "topic": "environment",
+      "wordCount": 166,
+      "text": "Climate change refers to long-term changes in temperature, precipitation, and other atmospheric conditions on Earth. When people talk about climate change, they are usually talking about the problem of human-caused global warming, which is happening now. But the climate of the Earth has changed over not just thousands of years, but tens or hundreds of millions of years. It has alternated between hotter and colder periods, with some extremes like ice ages. Global warming primarily involves the warming of the planet due to increased concentrations of greenhouse gases in Earth's atmosphere. These gases, like carbon dioxide and methane, come from human activities such as burning fossil fuels, deforestation, and industrial processes. These changes can lead to a variety of impacts, including more extreme weather events, rising sea levels, and disruptions to ecosystems and agriculture. The Earth's climate has also changed in the distant past because of factors such as changes in its orbit around the Sun. Those natural changes are different from the rapid human-caused warming that people usually mean when they discuss climate change today.",
+      "author": "Simple English Wikipedia contributors",
+      "sourceUrl": "https://simple.wikipedia.org/wiki/Climate_change",
+      "accessedAt": "2026-10-24",
+      "license": "CC BY-SA 4.0 / GFDL",
+      "questions": [
+        {
+          "id": "climate-1",
+          "prompt": "According to the passage, what is the main source of the greenhouse gases behind current global warming?",
+          "options": [
+            "Changes in the Moon's orbit",
+            "Human activities such as burning fossil fuels",
+            "The movement of ocean animals",
+            "Seasonal changes in rainfall"
+          ],
+          "answerIndex": 1,
+          "explanation": "The passage names burning fossil fuels, deforestation, and industrial processes as human activities that produce these gases."
+        },
+        {
+          "id": "climate-2",
+          "prompt": "Which result of climate change is mentioned in the passage?",
+          "options": [
+            "A reduction in all forms of weather",
+            "The disappearance of every ecosystem",
+            "Rising sea levels and more extreme weather",
+            "Longer years on Earth"
+          ],
+          "answerIndex": 2,
+          "explanation": "The passage lists more extreme weather, rising sea levels, and disruptions to ecosystems and agriculture."
+        }
+      ],
+      "day": 2,
+      "analysis": {
+        "mainIdea": "文章区分了地球历史上的自然气候变化与当前主要由人类活动造成的全球变暖。",
+        "structure": [
+          "界定 climate change，再聚焦当前的人为全球变暖。",
+          "解释温室气体的来源和主要后果。",
+          "补充地球轨道等自然因素，并强调自然变化与当前快速变暖不同。"
+        ],
+        "questionTips": [
+          "原因题的关键是 human activities 和 burning fossil fuels。",
+          "不要把文中列举的生态后果扩大成绝对结论。"
+        ]
+      },
+      "translationNotes": [
+        {
+          "source": "long-term changes in temperature, precipitation...",
+          "target": "温度、降水等长期变化"
+        },
+        {
+          "source": "human-caused global warming",
+          "target": "人为造成的全球变暖"
+        },
+        {
+          "source": "disruptions to ecosystems and agriculture",
+          "target": "对生态系统和农业的破坏"
+        }
+      ]
+    },
+    {
+      "id": "simplewiki:sleep:2026-10-24",
+      "title": "Why Sleep Matters",
+      "level": "foundation",
+      "topic": "health",
+      "wordCount": 175,
+      "text": "Sleep is a state of resting. It happens in most animals, including humans. During deep sleep, most of the muscles that animals can control are not active, but the body is resting to regain the energy it needs. All mammals and birds, as well as many reptiles, amphibians and fish, have a sleep cycle. In humans and many other animals, regular sleep is essential for survival. Although scientists know that sleep is extremely important to human health and well-being, they do not know exactly why humans and animals need it. If a person is tired from not getting enough sleep, they may struggle to function properly in common activities. Sleep deprivation can affect memory, mood, energy, focus, and health. It is one reason people are told not to drive or use large machines when they feel tired. The immune system normally releases compounds that help fight inflammation and infection. If a person does not get enough sleep, their body may be less able to protect them from illness.",
+      "author": "Simple English Wikipedia contributors",
+      "sourceUrl": "https://simple.wikipedia.org/wiki/Sleep",
+      "accessedAt": "2026-10-24",
+      "license": "CC BY-SA 4.0 / GFDL",
+      "questions": [
+        {
+          "id": "sleep-1",
+          "prompt": "What does the passage say about scientists' understanding of sleep?",
+          "options": [
+            "They know exactly why every animal sleeps",
+            "They know sleep matters but not exactly why it is needed",
+            "They believe only humans sleep",
+            "They believe sleep has no effect on health"
+          ],
+          "answerIndex": 1,
+          "explanation": "The passage says sleep is known to be important, but scientists do not know exactly why humans and animals need it."
+        },
+        {
+          "id": "sleep-2",
+          "prompt": "Which effect of sleep deprivation is mentioned?",
+          "options": [
+            "Better memory and stronger immunity",
+            "Difficulty with focus and increased health risks",
+            "A permanent need for less sleep",
+            "Faster physical growth"
+          ],
+          "answerIndex": 1,
+          "explanation": "The passage says sleep deprivation affects memory, mood, energy, focus, health, and the immune system."
+        }
+      ],
+      "day": 3,
+      "analysis": {
+        "mainIdea": "睡眠对大多数动物尤其是人类的生存和健康必不可少，睡眠不足会损害多个系统。",
+        "structure": [
+          "先定义睡眠并说明其普遍性。",
+          "指出睡眠必要性尚未被完全解释。",
+          "集中说明睡眠不足对记忆、情绪、注意力和免疫系统的影响。"
+        ],
+        "questionTips": [
+          "注意区分“科学家知道睡眠重要”和“尚不知道全部原因”。",
+          "健康影响题要依据文中明确列出的 memory、mood、focus、immune system。"
+        ]
+      },
+      "translationNotes": [
+        {
+          "source": "regular sleep is essential for survival",
+          "target": "规律睡眠对生存至关重要"
+        },
+        {
+          "source": "struggle to function properly",
+          "target": "难以正常发挥功能"
+        },
+        {
+          "source": "less able to protect them from illness",
+          "target": "更难抵御疾病"
+        }
+      ]
+    },
+    {
+      "id": "simplewiki:photosynthesis:2026-10-24",
+      "title": "How Photosynthesis Works",
+      "level": "foundation",
+      "topic": "science",
+      "wordCount": 170,
+      "text": "Photosynthesis is a process in which green plants make their own food from sunlight. During photosynthesis, plant cells containing chlorophyll produce substances such as glucose and starch from carbon dioxide and water, and oxygen is released. Before photosynthesis, the Earth's atmosphere had almost no oxygen. Even without oxygen, some simple life-forms could have existed, but the Great Oxygenation Event was a key event for the development of life as we know it. Carbon dioxide enters the leaf through the stomata by diffusion from the atmosphere. Water is absorbed from the soil by root hair cells, which have an increased surface area that helps them take in water. Photosynthesis occurs in the chloroplasts in leaves or other green tissues. These structures contain chlorophyll, the green pigment that absorbs light energy. Oxygen is produced as a result of photosynthesis and released into the atmosphere. Glucose is used in respiration to release energy in cells and can be stored as starch.",
+      "author": "Simple English Wikipedia contributors",
+      "sourceUrl": "https://simple.wikipedia.org/wiki/Photosynthesis",
+      "accessedAt": "2026-10-24",
+      "license": "CC BY-SA 4.0 / GFDL",
+      "questions": [
+        {
+          "id": "photosynthesis-1",
+          "prompt": "Which two substances do plants use to make food during photosynthesis?",
+          "options": [
+            "Oxygen and glucose",
+            "Carbon dioxide and water",
+            "Starch and chlorophyll",
+            "Sunlight and oxygen"
+          ],
+          "answerIndex": 1,
+          "explanation": "The passage states that carbon dioxide and water are used to produce food substances."
+        },
+        {
+          "id": "photosynthesis-2",
+          "prompt": "Where does photosynthesis take place in a plant?",
+          "options": [
+            "In the root hair cells",
+            "In the stomata only",
+            "In chloroplasts containing chlorophyll",
+            "In the surrounding atmosphere"
+          ],
+          "answerIndex": 2,
+          "explanation": "The passage says photosynthesis occurs in chloroplasts, which contain the green pigment chlorophyll."
+        }
+      ],
+      "day": 4,
+      "analysis": {
+        "mainIdea": "光合作用利用光能，把二氧化碳和水转化为植物所需物质，并释放氧气。",
+        "structure": [
+          "先总述光合作用及其产物。",
+          "说明地球早期氧气环境。",
+          "说明原料进入植物、发生部位、能量吸收和产物去向。"
+        ],
+        "questionTips": [
+          "过程题注意原料、条件和产物分别是什么。",
+          "位置题注意 chloroplasts 与 chlorophyll 的区别：前者是结构，后者是色素。"
+        ]
+      },
+      "translationNotes": [
+        {
+          "source": "produce food substances from carbon dioxide and water",
+          "target": "利用二氧化碳和水制造营养物质"
+        },
+        {
+          "source": "absorbed from the soil by root hair cells",
+          "target": "由根毛细胞从土壤中吸收"
+        },
+        {
+          "source": "the green pigment that absorbs light energy",
+          "target": "吸收光能的绿色色素"
+        }
+      ]
+    },
+    {
+      "id": "owid:climate-change-impacts:2026-10-25",
+      "title": "Climate Change and Its Consequences",
+      "day": 5,
+      "level": "intermediate",
+      "topic": "environment",
+      "wordCount": 96,
+      "text": "Current climate change is primarily caused by human emissions of greenhouse gases. This warming can drive large changes in sea level, sea ice and glaciers, as well as impacts on human health, farming systems, the stability of societies, and other species. To limit and stop climate change, we need to greatly reduce global emissions of greenhouse gases. This will require massive shifts in our energy and food systems. The data and research on this topic cover temperature anomalies, sea level rise, sea ice melt, glacier loss, and ocean acidification.",
+      "author": "Hannah Ritchie, Pablo Rosado, and Veronika Samborska",
+      "sourceUrl": "https://ourworldindata.org/climate-change",
+      "accessedAt": "2026-10-25",
+      "license": "CC BY 4.0",
+      "questions": [
+        {
+          "id": "owid-climate-1",
+          "prompt": "What does the passage identify as the primary cause of current climate change?",
+          "options": [
+            "Natural changes in glaciers",
+            "Human emissions of greenhouse gases",
+            "Ocean acidification alone",
+            "Changes in farming systems"
+          ],
+          "answerIndex": 1,
+          "explanation": "The first sentence states that human emissions of greenhouse gases are the primary cause."
+        },
+        {
+          "id": "owid-climate-2",
+          "prompt": "What does the passage say is required to limit climate change?",
+          "options": [
+            "Only measuring temperature anomalies",
+            "Reducing emissions and transforming energy and food systems",
+            "Stopping all research on sea ice",
+            "Changing the wording of the first paragraph"
+          ],
+          "answerIndex": 1,
+          "explanation": "The passage says emissions must be greatly reduced and that this will require massive shifts in energy and food systems."
+        }
+      ],
+      "analysis": {
+        "mainIdea": "当前气候变化主要来自温室气体排放，限制其影响需要大规模调整能源和粮食系统。",
+        "structure": [
+          "第一层：指出主要原因。",
+          "第二层：列举环境、健康、农业和社会影响。",
+          "第三层：提出减排及系统转型，并列出研究指标。"
+        ],
+        "questionTips": [
+          "原因题看 primarily caused by，不要误选后文的影响。",
+          "措施题看 need to reduce 和 require massive shifts。"
+        ]
+      },
+      "translationNotes": [
+        {
+          "source": "primarily caused by",
+          "target": "主要由……造成"
+        },
+        {
+          "source": "the stability of societies",
+          "target": "社会稳定"
+        },
+        {
+          "source": "massive shifts in our energy and food systems",
+          "target": "能源和粮食系统的巨大转变"
+        },
+        {
+          "source": "temperature anomalies",
+          "target": "温度异常"
+        }
+      ]
+    },
+    {
+      "id": "owid:mental-health-burden:2026-10-25",
+      "title": "The Burden of Poor Mental Health",
+      "day": 6,
+      "level": "intermediate",
+      "topic": "health",
+      "wordCount": 178,
+      "text": "Mental health is an essential part of people's lives and society. Poor mental health affects our well-being, our ability to work, and our relationships with friends, family, and community. Mental health conditions are not uncommon. Hundreds of millions suffer from them yearly, and many more do over their lifetimes. It's estimated that 1 in 3 women and 1 in 5 men will experience major depression in their lives. Other conditions, such as schizophrenia and bipolar disorder, are less common but still have a large impact on people's lives. Mental illnesses are treatable, and the impact they have can be reduced. Despite this, treatment is often lacking or poor quality, and many feel uncomfortable sharing their symptoms with healthcare professionals or people they know. This also makes it difficult to estimate the actual prevalence of mental illnesses. To support them, it's essential to have good data to understand these conditions - how, when, and why they occur, how many people are affected by them, and how they can be treated effectively and safely.",
+      "author": "Saloni Dattani, Lucas Rodes-Guirao, Hannah Ritchie, and Max Roser",
+      "sourceUrl": "https://ourworldindata.org/mental-health",
+      "accessedAt": "2026-10-25",
+      "license": "CC BY 4.0",
+      "questions": [
+        {
+          "id": "owid-mental-1",
+          "prompt": "Which area of life does the passage say poor mental health can affect?",
+          "options": [
+            "Only physical strength",
+            "Well-being, work, and relationships",
+            "Only academic grades",
+            "Only sleep duration"
+          ],
+          "answerIndex": 1,
+          "explanation": "The passage explicitly lists well-being, the ability to work, and relationships."
+        },
+        {
+          "id": "owid-mental-2",
+          "prompt": "Why can the actual prevalence of mental illness be difficult to estimate?",
+          "options": [
+            "Mental illnesses are never treated",
+            "Many people feel uncomfortable sharing their symptoms",
+            "No country collects any health data",
+            "All mental illnesses are extremely rare"
+          ],
+          "answerIndex": 1,
+          "explanation": "The passage connects underreporting and discomfort with the difficulty of estimating prevalence."
+        }
+      ],
+      "analysis": {
+        "mainIdea": "心理疾病影响广泛、并不罕见，而且虽然可治疗，实际求助和数据统计仍受到污名与治疗不足的限制。",
+        "structure": [
+          "先说明心理健康的重要性及其对生活的影响。",
+          "用统计说明常见性，并提到较不常见但影响重大的疾病。",
+          "转折指出可治疗性与治疗不足之间的矛盾。",
+          "最后提出需要高质量数据来理解负担和治疗。"
+        ],
+        "questionTips": [
+          "影响范围题按 affects 后面的并列结构定位。",
+          "推理题注意 Despite this 和 feel uncomfortable 之间的转折关系。"
+        ]
+      },
+      "translationNotes": [
+        {
+          "source": "an essential part of",
+          "target": "……必不可少的一部分"
+        },
+        {
+          "source": "are not uncommon",
+          "target": "并不罕见；双重否定表示常见"
+        },
+        {
+          "source": "treatment is often lacking or poor quality",
+          "target": "治疗常常缺失或质量不高"
+        },
+        {
+          "source": "the actual prevalence of mental illnesses",
+          "target": "心理疾病的实际患病率"
+        }
+      ]
+    }
+  ]
+}

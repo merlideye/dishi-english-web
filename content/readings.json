@@ -1,0 +1,166 @@
+{
+  "id": "open-reading-seed",
+  "title": "开放阅读种子包",
+  "version": "2026.10.24-1",
+  "generatedAt": "2026-10-24T13:55:00Z",
+  "description": "用于验证分级阅读、答题记录和内容升级机制的开放许可材料。",
+  "license": {
+    "name": "CC BY-SA 4.0 and GFDL",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+  },
+  "attribution": "Article text adapted from Simple English Wikipedia contributors. Question sets are original exercises created for this application and are not official Wikipedia questions.",
+  "items": [
+    {
+      "id": "simplewiki:artificial-intelligence:2026-10-24",
+      "title": "Artificial Intelligence",
+      "level": "foundation",
+      "topic": "technology",
+      "wordCount": 184,
+      "text": "Artificial intelligence (AI or A.I.) is a computer program or a machine that is able to learn and mimic human thinking. Sometimes the word AI is used to talk about neural networks or deep learning. Artificial intelligence is a system's ability to understand external data, to learn from that data, and to use what it has learned to achieve specific goals or tasks through adaptation. Artificial intelligence is widely applied in speech recognition, image recognition, robotics, autonomous systems, natural language processing, machine translation, predictive analytics, medical diagnostics, fraud detection, and the control of physical processes. John McCarthy came up with the name \"artificial intelligence\" in 1956. AI research started with a conference at Dartmouth College in 1956. It was a month-long brainstorming session attended by many people interested in AI. At the conference, they wrote programs which were able to beat humans at checkers or solve word problems. Later, faster computers and a focus on solving more specific problems helped AI become important again in data mining and medical diagnosis. In 1997, the chess computer Deep Blue became the first computer program to beat chess world champion Garry Kasparov.",
+      "author": "Simple English Wikipedia contributors",
+      "sourceUrl": "https://simple.wikipedia.org/wiki/Artificial_intelligence",
+      "accessedAt": "2026-10-24",
+      "license": "CC BY-SA 4.0 / GFDL",
+      "questions": [
+        {
+          "id": "ai-1",
+          "prompt": "What is artificial intelligence described as in the passage?",
+          "options": [
+            "A program or machine that can learn and mimic human thinking",
+            "A type of computer screen",
+            "A conference held every year",
+            "A machine that can only play chess"
+          ],
+          "answerIndex": 0,
+          "explanation": "The first sentence defines AI as a computer program or machine able to learn and mimic human thinking."
+        },
+        {
+          "id": "ai-2",
+          "prompt": "What happened at the Dartmouth College conference in 1956?",
+          "options": [
+            "Deep Blue won a chess match",
+            "Researchers wrote early AI programs",
+            "A law banned artificial intelligence",
+            "The first smartphone was invented"
+          ],
+          "answerIndex": 1,
+          "explanation": "The passage says that people at the conference wrote programs that could beat humans at checkers or solve word problems."
+        }
+      ]
+    },
+    {
+      "id": "simplewiki:climate-change:2026-10-24",
+      "title": "Climate Change",
+      "level": "foundation",
+      "topic": "environment",
+      "wordCount": 166,
+      "text": "Climate change refers to long-term changes in temperature, precipitation, and other atmospheric conditions on Earth. When people talk about climate change, they are usually talking about the problem of human-caused global warming, which is happening now. But the climate of the Earth has changed over not just thousands of years, but tens or hundreds of millions of years. It has alternated between hotter and colder periods, with some extremes like ice ages. Global warming primarily involves the warming of the planet due to increased concentrations of greenhouse gases in Earth's atmosphere. These gases, like carbon dioxide and methane, come from human activities such as burning fossil fuels, deforestation, and industrial processes. These changes can lead to a variety of impacts, including more extreme weather events, rising sea levels, and disruptions to ecosystems and agriculture. The Earth's climate has also changed in the distant past because of factors such as changes in its orbit around the Sun. Those natural changes are different from the rapid human-caused warming that people usually mean when they discuss climate change today.",
+      "author": "Simple English Wikipedia contributors",
+      "sourceUrl": "https://simple.wikipedia.org/wiki/Climate_change",
+      "accessedAt": "2026-10-24",
+      "license": "CC BY-SA 4.0 / GFDL",
+      "questions": [
+        {
+          "id": "climate-1",
+          "prompt": "According to the passage, what is the main source of the greenhouse gases behind current global warming?",
+          "options": [
+            "Changes in the Moon's orbit",
+            "Human activities such as burning fossil fuels",
+            "The movement of ocean animals",
+            "Seasonal changes in rainfall"
+          ],
+          "answerIndex": 1,
+          "explanation": "The passage names burning fossil fuels, deforestation, and industrial processes as human activities that produce these gases."
+        },
+        {
+          "id": "climate-2",
+          "prompt": "Which result of climate change is mentioned in the passage?",
+          "options": [
+            "A reduction in all forms of weather",
+            "The disappearance of every ecosystem",
+            "Rising sea levels and more extreme weather",
+            "Longer years on Earth"
+          ],
+          "answerIndex": 2,
+          "explanation": "The passage lists more extreme weather, rising sea levels, and disruptions to ecosystems and agriculture."
+        }
+      ]
+    },
+    {
+      "id": "simplewiki:sleep:2026-10-24",
+      "title": "Why Sleep Matters",
+      "level": "foundation",
+      "topic": "health",
+      "wordCount": 175,
+      "text": "Sleep is a state of resting. It happens in most animals, including humans. During deep sleep, most of the muscles that animals can control are not active, but the body is resting to regain the energy it needs. All mammals and birds, as well as many reptiles, amphibians and fish, have a sleep cycle. In humans and many other animals, regular sleep is essential for survival. Although scientists know that sleep is extremely important to human health and well-being, they do not know exactly why humans and animals need it. If a person is tired from not getting enough sleep, they may struggle to function properly in common activities. Sleep deprivation can affect memory, mood, energy, focus, and health. It is one reason people are told not to drive or use large machines when they feel tired. The immune system normally releases compounds that help fight inflammation and infection. If a person does not get enough sleep, their body may be less able to protect them from illness.",
+      "author": "Simple English Wikipedia contributors",
+      "sourceUrl": "https://simple.wikipedia.org/wiki/Sleep",
+      "accessedAt": "2026-10-24",
+      "license": "CC BY-SA 4.0 / GFDL",
+      "questions": [
+        {
+          "id": "sleep-1",
+          "prompt": "What does the passage say about scientists' understanding of sleep?",
+          "options": [
+            "They know exactly why every animal sleeps",
+            "They know sleep matters but not exactly why it is needed",
+            "They believe only humans sleep",
+            "They believe sleep has no effect on health"
+          ],
+          "answerIndex": 1,
+          "explanation": "The passage says sleep is known to be important, but scientists do not know exactly why humans and animals need it."
+        },
+        {
+          "id": "sleep-2",
+          "prompt": "Which effect of sleep deprivation is mentioned?",
+          "options": [
+            "Better memory and stronger immunity",
+            "Difficulty with focus and increased health risks",
+            "A permanent need for less sleep",
+            "Faster physical growth"
+          ],
+          "answerIndex": 1,
+          "explanation": "The passage says sleep deprivation affects memory, mood, energy, focus, health, and the immune system."
+        }
+      ]
+    },
+    {
+      "id": "simplewiki:photosynthesis:2026-10-24",
+      "title": "How Photosynthesis Works",
+      "level": "foundation",
+      "topic": "science",
+      "wordCount": 170,
+      "text": "Photosynthesis is a process in which green plants make their own food from sunlight. During photosynthesis, plant cells containing chlorophyll produce substances such as glucose and starch from carbon dioxide and water, and oxygen is released. Before photosynthesis, the Earth's atmosphere had almost no oxygen. Even without oxygen, some simple life-forms could have existed, but the Great Oxygenation Event was a key event for the development of life as we know it. Carbon dioxide enters the leaf through the stomata by diffusion from the atmosphere. Water is absorbed from the soil by root hair cells, which have an increased surface area that helps them take in water. Photosynthesis occurs in the chloroplasts in leaves or other green tissues. These structures contain chlorophyll, the green pigment that absorbs light energy. Oxygen is produced as a result of photosynthesis and released into the atmosphere. Glucose is used in respiration to release energy in cells and can be stored as starch.",
+      "author": "Simple English Wikipedia contributors",
+      "sourceUrl": "https://simple.wikipedia.org/wiki/Photosynthesis",
+      "accessedAt": "2026-10-24",
+      "license": "CC BY-SA 4.0 / GFDL",
+      "questions": [
+        {
+          "id": "photosynthesis-1",
+          "prompt": "Which two substances do plants use to make food during photosynthesis?",
+          "options": [
+            "Oxygen and glucose",
+            "Carbon dioxide and water",
+            "Starch and chlorophyll",
+            "Sunlight and oxygen"
+          ],
+          "answerIndex": 1,
+          "explanation": "The passage states that carbon dioxide and water are used to produce food substances."
+        },
+        {
+          "id": "photosynthesis-2",
+          "prompt": "Where does photosynthesis take place in a plant?",
+          "options": [
+            "In the root hair cells",
+            "In the stomata only",
+            "In chloroplasts containing chlorophyll",
+            "In the surrounding atmosphere"
+          ],
+          "answerIndex": 2,
+          "explanation": "The passage says photosynthesis occurs in chloroplasts, which contain the green pigment chlorophyll."
+        }
+      ]
+    }
+  ]
+}
