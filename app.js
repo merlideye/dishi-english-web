@@ -29,10 +29,12 @@ import {
   applyRating,
   buildInitialQueue,
   buildPlan,
+  cardModeFor,
   chooseReading,
   createWordState,
   difficultyLevelOf,
   normalizeRecallAnswer,
+  wordBank,
 } from "./js/scheduler.js";
 import {
   buildCheckpointPayload,
@@ -49,6 +51,7 @@ const ENERGY_KEY = "preferredEnergyState";
 const LAST_FEEDBACK_KEY = "lastFeedbackAt";
 const CUSTOM_WORD_PACK_KEY = "customWordPackV1";
 const CUSTOM_READING_PACK_KEY = "customReadingPackV1";
+const APP_VERSION = "2026.10.28-1";
 const ENERGY_LABELS = {
   normal: "正常",
   energized: "状态好",
@@ -90,8 +93,12 @@ const ui = {
   currentTaskId: null,
   cardShownAt: null,
   pendingGrade: null,
+  spellFeedback: null,
   readingStartedAt: null,
   readingFeedback: null,
+  readingDraft: null,
+  questionSheetOpen: false,
+  questionSheetScrollY: 0,
   currentAccount: null,
   accountGateMessage: "",
   accountSetupMode: "select",
@@ -761,7 +768,7 @@ function shellMarkup(screen) {
   const account = ui.currentAccount;
   return `
     <div class="app-shell">
-      <header class="topbar">
+      <header class="topbar ${ui.page === "session" ? "session-topbar" : ""}">
         <div class="brand">
           <div class="brand-mark">滴</div>
           <div>
@@ -1175,7 +1182,7 @@ function difficultyMarkup(level, hardFlag = false) {
   `;
 }
 
-function renderWordCard(session, item) {
+function renderWordCardLegacy(session, item) {
   const word = content.wordsById.get(item.wordId);
   if (!word) {
     return `<div class="empty-note">词包中已找不到 ${escapeHtml(item.wordId)}。请重新加载内容。</div>`;
@@ -1291,7 +1298,7 @@ function renderWordCard(session, item) {
   `;
 }
 
-function renderPendingWord(session) {
+function renderPendingWordLegacy(session) {
   const pending = ui.pendingGrade;
   const word = content.wordsById.get(pending?.item.wordId);
   if (!word) {
@@ -1371,6 +1378,190 @@ function renderPendingWord(session) {
           </div>
         </div>
       </div>
+    </article>
+  `;
+}
+
+function bankLabel(word) {
+  const bank = wordBank(word);
+  if (bank === "shared") {
+    return "阅读 + 拼写";
+  }
+  if (bank === "spelling") {
+    return "拼写词";
+  }
+  return "阅读词";
+}
+
+function wordSourceMarkup(word) {
+  const source = word.source || {};
+  const meta = [source.name, source.license].filter(Boolean).join(" · ");
+  const rank = word.frequencyRank ? ` · 词频序 ${word.frequencyRank}` : "";
+  const link = source.url
+    ? ` · <a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">查看来源</a>`
+    : "";
+  return `<div class="word-source">来源：${escapeHtml(meta || "内容包")}${escapeHtml(rank)}${link}</div>`;
+}
+
+function wordExtraMarkup(word, state, level, revealed = false) {
+  const definition = word.definition
+    ? `<p class="answer-definition">${escapeHtml(word.definition)}</p>`
+    : '<p class="muted">暂未配置英文释义。</p>';
+  const example = word.exampleEn || word.example || "";
+  return `
+    <div class="word-extra" ${revealed ? "" : "hidden"}>
+      <details class="english-detail">
+        <summary>英文释义（有歧义再看）</summary>
+        ${definition}
+        ${wordMetaMarkup(word)}
+      </details>
+      ${example ? `<p class="word-example">${escapeHtml(example)}</p>` : ""}
+      <div class="difficulty-preview">
+        ${difficultyMarkup(level, Boolean(state?.hardFlag))}
+        <span>等级越高，后续出现越频繁。</span>
+      </div>
+      ${wordSourceMarkup(word)}
+    </div>
+  `;
+}
+
+function renderTeachCard(word, item, level, state) {
+  return `
+    <article class="session-card word-card teach-card" data-card-key="${escapeHtml(item.cardKey)}">
+      <div class="session-kicker">
+        <span>教学卡 · 先看一遍</span>
+        <span class="difficulty-row">${difficultyMarkup(level, Boolean(state?.hardFlag))}</span>
+      </div>
+      <div class="word-head">
+        <h2 class="word-text">${escapeHtml(word.word)}</h2>
+        <div class="phonetic-row">
+          <p class="phonetic">/${escapeHtml(word.phonetic)}/</p>
+          <button class="speak-button" type="button" data-action="speak-word" data-word="${escapeHtml(word.word)}" title="朗读单词">▶</button>
+        </div>
+      </div>
+      <div class="word-meaning">
+        <span class="meaning-label">中文释义</span>
+        <p class="answer-meaning">${multiline(word.meaning)}</p>
+      </div>
+      ${wordExtraMarkup(word, state, level, true)}
+      <p class="teach-note">这个词连续错了 2 次，先看一遍再回去；这次不计分。</p>
+      <button class="primary-button confirm-word" data-action="finish-teach">我记住了，继续</button>
+    </article>
+  `;
+}
+
+function renderSpellCard(word, item, level, state) {
+  return `
+    <article class="session-card word-card spell-card" data-card-key="${escapeHtml(item.cardKey)}">
+      <div class="session-kicker">
+        <span>拼写 · 根据中文写英文</span>
+        <span class="difficulty-row">${difficultyMarkup(level, Boolean(state?.hardFlag))}</span>
+      </div>
+      ${
+        ui.spellFeedback?.cardKey === item.cardKey
+          ? `<div class="spell-result wrong">
+               <strong>拼写不正确</strong>
+               <span>你的答案：${escapeHtml(ui.spellFeedback.answer || "未填写")}</span>
+               <span>正确拼写：${escapeHtml(word.word)}</span>
+             </div>
+             <button class="primary-button spell-submit" data-action="continue-spell-wrong">继续</button>`
+          : `<form id="spell-form" class="spell-form">
+               <p class="spell-prompt">根据中文写出英文</p>
+               <p class="answer-meaning spell-meaning">${multiline(word.meaning)}</p>
+               <label class="spell-label" for="spell-answer">英文单词</label>
+               <input
+                 id="spell-answer"
+                 name="spellAnswer"
+                 type="text"
+                 autocomplete="off"
+                 autocapitalize="none"
+                 spellcheck="false"
+                 placeholder="输入英文单词"
+                 required
+               >
+               <button class="primary-button spell-submit" type="submit">检查拼写</button>
+             </form>`
+      }
+      ${wordExtraMarkup(word, state, level, true)}
+    </article>
+  `;
+}
+
+function renderWordCard(session, item) {
+  const word = content.wordsById.get(item.wordId);
+  if (!word) {
+    return `<div class="empty-note">词包中已找不到 ${escapeHtml(item.wordId)}。请重新加载内容。</div>`;
+  }
+  const state = wordStateFor(item.wordId);
+  const level = difficultyLevelOf(state);
+
+  if (ui.currentTaskId !== item.cardKey) {
+    ui.currentTaskId = item.cardKey;
+    ui.cardShownAt = Date.now();
+  }
+
+  if ((item.missCount || 0) >= 2 && !item.taught) {
+    return renderTeachCard(word, item, level, state);
+  }
+  if (item.cardMode === "spell") {
+    return renderSpellCard(word, item, level, state);
+  }
+
+  const pending =
+    ui.pendingGrade?.item?.cardKey === item.cardKey
+      ? ui.pendingGrade
+      : null;
+  const selected = pending?.rating || null;
+  const modeLabel =
+    item.source === "yesterday"
+      ? "昨日回看"
+      : item.mode === "review"
+        ? "到期复习"
+        : "新词学习";
+
+  return `
+    <article class="session-card word-card" data-card-key="${escapeHtml(item.cardKey)}">
+      <div class="session-kicker">
+        <span>${modeLabel}${word.studyDay ? ` · 第 ${word.studyDay} 天` : ""}</span>
+        <span class="difficulty-row">
+          ${difficultyMarkup(level, Boolean(state?.hardFlag))}
+          <span>${escapeHtml(bankLabel(word))}</span>
+        </span>
+      </div>
+      <div class="word-head">
+        <h2 class="word-text">${escapeHtml(word.word)}</h2>
+        <div class="phonetic-row">
+          <p class="phonetic">/${escapeHtml(word.phonetic)}/</p>
+          <button class="speak-button" type="button" data-action="speak-word" data-word="${escapeHtml(word.word)}" title="朗读单词">▶</button>
+        </div>
+      </div>
+      <button class="primary-button confirm-word" data-action="confirm-word-rating" ${selected ? "" : "disabled"}>
+        确认并继续
+      </button>
+      <div class="word-meaning">
+        <span class="meaning-label">中文释义</span>
+        <p class="answer-meaning">${multiline(word.meaning)}</p>
+      </div>
+      <div class="rating-grid" role="group" aria-label="熟悉度评价">
+        ${Object.entries(RATING_LABELS)
+          .map(
+            ([rating, label]) => `
+              <button
+                class="rating-button ${selected === rating ? "selected" : ""}"
+                data-action="rate-word"
+                data-rating="${rating}"
+                aria-pressed="${selected === rating}"
+              >
+                ${label}
+              </button>
+            `,
+          )
+          .join("")}
+      </div>
+      <p class="rating-hint">
+        ${selected ? `已选“${RATING_LABELS[selected]}”，点上面的确认继续。` : "先点一个评价，确认按钮才会亮。"}
+      </p>
+      ${wordExtraMarkup(word, state, level, Boolean(selected))}
     </article>
   `;
 }
@@ -1501,6 +1692,67 @@ function readingMemoMarkup(attemptId) {
   `;
 }
 
+function readingAnsweredCount(reading) {
+  const answers = ui.readingDraft?.answers || {};
+  return reading.questions.filter((question) =>
+    Number.isInteger(answers[question.id]),
+  ).length;
+}
+
+function readingQuestionMarkup(reading, question, index, prefix) {
+  const answers = ui.readingDraft?.answers || {};
+  const selected = answers[question.id];
+  return `
+    <fieldset class="question" data-question-id="${escapeHtml(question.id)}">
+      <legend class="muted">Question ${index + 1}</legend>
+      <h4>${escapeHtml(question.prompt)}</h4>
+      ${question.options
+        .map(
+          (option, optionIndex) => `
+            <label class="choice">
+              <input
+                type="radio"
+                name="${escapeHtml(prefix)}-${escapeHtml(question.id)}"
+                value="${optionIndex}"
+                data-reading-question="${escapeHtml(question.id)}"
+                data-option-index="${optionIndex}"
+                ${selected === optionIndex ? "checked" : ""}
+              >
+              <span>${String.fromCharCode(65 + optionIndex)}. ${escapeHtml(option)}</span>
+            </label>
+          `,
+        )
+        .join("")}
+    </fieldset>
+  `;
+}
+
+function readingSheetMarkup(reading) {
+  const total = reading.questions.length;
+  const answered = readingAnsweredCount(reading);
+  return `
+    <div class="question-sheet-backdrop" data-action="close-question-sheet" hidden></div>
+    <section class="question-sheet" id="question-sheet" role="dialog" aria-modal="true" aria-label="阅读题目" hidden>
+      <div class="question-sheet-handle"></div>
+      <div class="question-sheet-head">
+        <strong>题目 <span data-question-count>${answered}/${total}</span></strong>
+        <button class="ghost-button" type="button" data-action="close-question-sheet">关闭</button>
+      </div>
+      <div class="question-sheet-body">
+        ${reading.questions
+          .map((question, index) =>
+            readingQuestionMarkup(reading, question, index, "sheet"),
+          )
+          .join("")}
+      </div>
+      <div class="question-sheet-actions">
+        <button class="ghost-button" type="button" data-action="close-question-sheet">回到文章</button>
+        <button class="primary-button" type="button" data-action="submit-reading-sheet">提交答案</button>
+      </div>
+    </section>
+  `;
+}
+
 function renderReading(session) {
   const reading = content.readingsById.get(session.plan.readingId) ||
     content.readings.items[0];
@@ -1510,6 +1762,10 @@ function renderReading(session) {
 
   if (!ui.readingStartedAt) {
     ui.readingStartedAt = Date.now();
+  }
+  if (!ui.readingDraft || ui.readingDraft.readingId !== reading.id) {
+    ui.readingDraft = { readingId: reading.id, answers: {} };
+    ui.questionSheetOpen = false;
   }
 
   if (ui.readingFeedback) {
@@ -1586,8 +1842,10 @@ function renderReading(session) {
     `;
   }
 
+  const answered = readingAnsweredCount(reading);
+  const total = reading.questions.length;
   return `
-    <article class="session-card">
+    <article class="session-card reading-card">
       <div class="reading-header">
         <div>
           <span class="eyebrow">READING · ${escapeHtml(reading.level.toUpperCase())}</span>
@@ -1604,23 +1862,8 @@ function renderReading(session) {
       <form id="reading-form">
         <div class="question-list">
           ${reading.questions
-            .map(
-              (question, index) => `
-                <fieldset class="question" style="border:1px solid rgba(23,60,53,.1);margin:0">
-                  <legend class="muted" style="padding:0 6px">Question ${index + 1}</legend>
-                  <h4>${escapeHtml(question.prompt)}</h4>
-                  ${question.options
-                    .map(
-                      (option, optionIndex) => `
-                        <label class="choice">
-                          <input type="radio" name="${escapeHtml(question.id)}" value="${optionIndex}" required>
-                          <span>${String.fromCharCode(65 + optionIndex)}. ${escapeHtml(option)}</span>
-                        </label>
-                      `,
-                    )
-                    .join("")}
-                </fieldset>
-              `,
+            .map((question, index) =>
+              readingQuestionMarkup(reading, question, index, "inline"),
             )
             .join("")}
         </div>
@@ -1629,6 +1872,10 @@ function renderReading(session) {
           <button class="primary-button" type="submit">提交答案</button>
         </div>
       </form>
+      <button class="question-fab" type="button" data-action="open-question-sheet" aria-label="打开题目浮窗">
+        题目 <span data-question-count>${answered}/${total}</span>
+      </button>
+      ${readingSheetMarkup(reading)}
     </article>
   `;
 }
@@ -1663,15 +1910,6 @@ function renderSessionScreen() {
     return renderHome();
   }
 
-  if (ui.pendingGrade) {
-    return shellMarkup(`
-      <div class="session-screen screen">
-        ${sessionToolbar(session)}
-        ${renderPendingWord(session)}
-      </div>
-    `);
-  }
-
   if (session.batchReviewPending) {
     return shellMarkup(`
       <div class="session-screen screen">
@@ -1694,7 +1932,7 @@ function renderSessionScreen() {
   const readingAttempt = readingAttemptForSession(session.id);
   if (session.plan.readingIncluded && readingAttempt && ui.readingFeedback) {
     return shellMarkup(`
-      <div class="session-screen screen">
+      <div class="session-screen screen reading-mode">
         ${sessionToolbar(session)}
         ${renderReading(session)}
       </div>
@@ -1703,7 +1941,7 @@ function renderSessionScreen() {
 
   if (session.plan.readingIncluded && !readingAttempt) {
     return shellMarkup(`
-      <div class="session-screen screen">
+      <div class="session-screen screen reading-mode">
         ${sessionToolbar(session)}
         ${renderReading(session)}
       </div>
@@ -2090,13 +2328,14 @@ function renderData() {
         <div>
           <span class="eyebrow">CONTENT & DATA</span>
           <h2>${escapeHtml(ui.currentAccount?.name || "")}的内容与数据</h2>
-          <p>学习记录按账号独立保存，修改类操作由管理员密码保护。</p>
+          <p>学习记录按账号独立保存，修改类操作由管理员密码保护。<br><span class="muted">应用版本 ${APP_VERSION}</span></p>
         </div>
         ${
           unlocked
             ? '<button class="secondary-button" data-action="refresh-content">重新加载内容包</button>'
             : '<button class="secondary-button" data-action="focus-admin">管理员解锁</button>'
         }
+        <button class="secondary-button" data-action="check-update">检查更新</button>
       </div>
       <div class="report-layout">
         <div class="stack">
@@ -2218,6 +2457,33 @@ function render() {
   updateTimerDisplay();
 }
 
+function yesterdayReviewForToday() {
+  const today = localDayKey();
+  if (data.sessions.some((session) => session.day === today)) {
+    return { wordIds: [], reading: null };
+  }
+  const yesterday = localDayKey(new Date(Date.now() - DAY_MS));
+  const attempts = data.attempts.filter(
+    (attempt) => attempt.day === yesterday && !attempt.skipped,
+  );
+  const wordIds = [
+    ...new Set(
+      attempts
+        .filter((attempt) => attempt.itemType === "word")
+        .map((attempt) => attempt.itemId),
+    ),
+  ].filter((id) => content.wordsById.has(id));
+  const readingAttempt = [...attempts]
+    .reverse()
+    .find((attempt) => attempt.itemType === "reading");
+  return {
+    wordIds,
+    reading: readingAttempt
+      ? content.readingsById.get(readingAttempt.itemId) || null
+      : null,
+  };
+}
+
 async function createSession() {
   if (ui.activeSession) {
     ui.page = "session";
@@ -2226,12 +2492,40 @@ async function createSession() {
   }
 
   const plan = buildPreviewPlan();
+  const yesterdayReview = yesterdayReviewForToday();
+  const forcedTasks = [];
+  for (const wordId of yesterdayReview.wordIds) {
+    if (plan.tasks.some((task) => task.id === wordId)) {
+      continue;
+    }
+    const word = content.wordsById.get(wordId);
+    if (!word) {
+      continue;
+    }
+    forcedTasks.push({
+      id: wordId,
+      mode: "review",
+      cardMode: cardModeFor(word, wordStateFor(wordId)),
+      bank: wordBank(word),
+      source: "yesterday",
+    });
+  }
+  if (forcedTasks.length) {
+    plan.tasks = [...forcedTasks, ...plan.tasks];
+  }
+  if (yesterdayReview.reading) {
+    plan.readingIncluded = true;
+    plan.readingReason = "昨日文章回看。";
+  }
+
   const previousReadingIds = data.attempts
     .filter((attempt) => attempt.itemType === "reading")
     .map((attempt) => attempt.itemId);
-  const reading = plan.readingIncluded
-    ? chooseReading(content.readings.items, previousReadingIds, "foundation")
-    : null;
+  const reading =
+    yesterdayReview.reading ||
+    (plan.readingIncluded
+      ? chooseReading(content.readings.items, previousReadingIds, "foundation")
+      : null);
 
   if (!plan.tasks.length && !reading) {
     showToast("当前没有到期复习或新词，也没有可安排的阅读。");
@@ -2273,6 +2567,30 @@ async function createSession() {
   render();
 }
 
+function updateWordCardSelection(cardKey, rating) {
+  const card = document.querySelector(".word-card");
+  if (!card || card.dataset.cardKey !== cardKey) {
+    return;
+  }
+  card.querySelectorAll('[data-action="rate-word"]').forEach((button) => {
+    const active = button.dataset.rating === rating;
+    button.classList.toggle("selected", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+  const confirm = card.querySelector('[data-action="confirm-word-rating"]');
+  if (confirm) {
+    confirm.disabled = false;
+  }
+  const extra = card.querySelector(".word-extra");
+  if (extra) {
+    extra.hidden = false;
+  }
+  const hint = card.querySelector(".rating-hint");
+  if (hint) {
+    hint.textContent = `已选“${RATING_LABELS[rating]}”，点上面的确认继续。`;
+  }
+}
+
 function beginWordRating(rating) {
   const item = unresolvedSessionTasks(ui.activeSession)[0];
   if (!item || !Object.values(RATINGS).includes(rating)) {
@@ -2284,13 +2602,17 @@ function beginWordRating(rating) {
     return;
   }
 
-  ui.pendingGrade = {
-    item,
-    initialRating: rating,
-    rating,
-    responseMs: Math.max(0, Date.now() - (ui.cardShownAt || Date.now())),
-  };
-  render();
+  if (ui.pendingGrade?.item?.cardKey === item.cardKey) {
+    ui.pendingGrade.rating = rating;
+  } else {
+    ui.pendingGrade = {
+      item,
+      initialRating: rating,
+      rating,
+      responseMs: Math.max(0, Date.now() - (ui.cardShownAt || Date.now())),
+    };
+  }
+  updateWordCardSelection(item.cardKey, rating);
 }
 
 function changePendingRating(rating) {
@@ -2298,7 +2620,7 @@ function changePendingRating(rating) {
     return;
   }
   ui.pendingGrade.rating = rating;
-  render();
+  updateWordCardSelection(ui.pendingGrade.item.cardKey, rating);
 }
 
 function submitRetryRecall(form) {
@@ -2392,7 +2714,14 @@ async function confirmPendingWord() {
     showToast("当前词条已不在内容包中，无法保存。");
     return;
   }
-  const nextState = applyRating(previous, pending.rating);
+  const mode = current.cardMode === "spell" ? "spell" : "recognize";
+  const nextState = applyRating(
+    previous,
+    pending.rating,
+    Date.now(),
+    pending.responseMs,
+    { mode, promotable: wordBank(word) === "shared" },
+  );
   const queueResult = advanceLearningQueue(
     queue,
     current,
@@ -2412,7 +2741,7 @@ async function confirmPendingWord() {
     queue: queueResult.queue,
     deferredWordIds: [...deferredWordIds],
     batchWordIds,
-    batchReviewPending: batchWordIds.length >= 5,
+    batchReviewPending: false,
     updatedAt: Date.now(),
   };
   const attempt = {
@@ -2423,6 +2752,8 @@ async function confirmPendingWord() {
     itemType: "word",
     itemId: current.wordId,
     mode: current.mode,
+    cardMode: mode,
+    bank: wordBank(word),
     cardAttemptNumber: current.attemptNumber,
     initialRating: pending.initialRating,
     rating: pending.rating,
@@ -2435,6 +2766,8 @@ async function confirmPendingWord() {
     deferred: queueResult.deferred,
     difficultyLevel: nextState.difficultyLevel,
     hardFlag: nextState.hardFlag,
+    recognitionStreak: nextState.recognitionStreak,
+    promotedToSpelling: nextState.promotedToSpelling,
     wordSnapshot: {
       word: word.word,
       phonetic: word.phonetic,
@@ -2468,19 +2801,104 @@ async function confirmPendingWord() {
   }
   ui.activeSession = updatedSession;
   ui.pendingGrade = null;
+  ui.spellFeedback = null;
   ui.currentTaskId = null;
   ui.cardShownAt = null;
-  if (updatedSession.batchReviewPending) {
-    ui.batchMeaningsVisible = false;
-  }
 
-  if (queueResult.requeued) {
-    const delay = pending.rating === RATINGS.unknown ? 4 : 3;
-    showToast(`将在约 ${delay} 张卡后再次出现。`);
+  if (
+    mode === "recognize" &&
+    nextState.promotedToSpelling &&
+    !previous.promotedToSpelling
+  ) {
+    showToast("已连续 3 次认识，这个词之后进入拼写队列。");
+  } else if (mode === "spell" && pending.rating === RATINGS.known) {
+    showToast("拼写正确。");
+  } else if (queueResult.requeued) {
+    const delay = pending.rating === RATINGS.unknown ? 2 : 4;
+    showToast(`将在约 ${delay} 张卡后再次出现；不设次数上限。`);
   } else if (queueResult.deferred) {
     showToast("该词已标记为后续重点，会继续在后续复习中出现。");
   }
   render();
+  window.scrollTo({ top: 0, behavior: "auto" });
+}
+
+async function finishTeach() {
+  const session = ui.activeSession;
+  if (!session) {
+    return;
+  }
+  const queue = sessionQueue(session);
+  const item = queue[0];
+  if (!item) {
+    return;
+  }
+  const updatedItem = { ...item, taught: true, missCount: 0 };
+  const updatedSession = {
+    ...session,
+    queue: [updatedItem, ...queue.slice(1)],
+    updatedAt: Date.now(),
+  };
+  await putRecord(STORES.sessions, updatedSession);
+  const sessionIndex = data.sessions.findIndex(
+    (candidate) => candidate.id === session.id,
+  );
+  if (sessionIndex >= 0) {
+    data.sessions[sessionIndex] = updatedSession;
+  }
+  ui.activeSession = updatedSession;
+  ui.currentTaskId = null;
+  ui.cardShownAt = Date.now();
+  render();
+  window.scrollTo({ top: 0, behavior: "auto" });
+}
+
+async function submitSpell(form) {
+  const item = unresolvedSessionTasks(ui.activeSession)[0];
+  const word = content.wordsById.get(item?.wordId);
+  if (!item || !word) {
+    return;
+  }
+  const answer = String(new FormData(form).get("spellAnswer") || "").trim();
+  const correct =
+    normalizeRecallAnswer(answer) === normalizeRecallAnswer(word.word);
+
+  if (!correct) {
+    ui.spellFeedback = { cardKey: item.cardKey, answer };
+    render();
+    window.scrollTo({ top: 0, behavior: "auto" });
+    return;
+  }
+
+  ui.pendingGrade = {
+    item,
+    initialRating: RATINGS.known,
+    rating: RATINGS.known,
+    responseMs: Math.max(0, Date.now() - (ui.cardShownAt || Date.now())),
+    recallAnswer: answer,
+    recallCorrect: true,
+    recallType: "spelling",
+  };
+  await confirmPendingWord();
+}
+
+async function continueSpellWrong() {
+  const item = unresolvedSessionTasks(ui.activeSession)[0];
+  const feedback = ui.spellFeedback;
+  if (!item) {
+    return;
+  }
+  ui.spellFeedback = null;
+  ui.pendingGrade = {
+    item,
+    initialRating: RATINGS.unknown,
+    rating: RATINGS.unknown,
+    responseMs: Math.max(0, Date.now() - (ui.cardShownAt || Date.now())),
+    recallAnswer: feedback?.answer || "",
+    recallCorrect: false,
+    recallType: "spelling",
+  };
+  await confirmPendingWord();
 }
 
 async function completeBatchReview() {
@@ -2507,26 +2925,26 @@ async function completeBatchReview() {
   render();
 }
 
-async function submitReading(form) {
+async function submitReading() {
   const reading = content.readingsById.get(ui.activeSession.plan.readingId) ||
     content.readings.items[0];
   if (!reading) {
-    return;
+    return false;
   }
 
-  const formData = new FormData(form);
-  const answers = {};
+  const answers = { ...(ui.readingDraft?.answers || {}) };
   let correctCount = 0;
 
   for (const question of reading.questions) {
-    const value = formData.get(question.id);
-    if (value === null) {
-      showToast("请完成所有题目后再提交。");
-      return;
+    if (!Number.isInteger(answers[question.id])) {
+      showToast("还有题目没有选，先补完再提交。");
+      const field = document.querySelector(
+        `[data-question-id="${CSS.escape(question.id)}"]`,
+      );
+      field?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return false;
     }
-    const selected = Number(value);
-    answers[question.id] = selected;
-    if (selected === question.answerIndex) {
+    if (answers[question.id] === question.answerIndex) {
       correctCount += 1;
     }
   }
@@ -2580,7 +2998,71 @@ async function submitReading(form) {
     answers,
     attemptId: attempt.id,
   };
+  ui.readingDraft = null;
+  ui.questionSheetOpen = false;
+  document.body.classList.remove("sheet-open");
   render();
+  window.scrollTo({ top: 0, behavior: "auto" });
+  return true;
+}
+
+function updateQuestionCount() {
+  const reading = content.readingsById.get(ui.activeSession?.plan?.readingId);
+  if (!reading) {
+    return;
+  }
+  const answered = readingAnsweredCount(reading);
+  document.querySelectorAll("[data-question-count]").forEach((element) => {
+    element.textContent = `${answered}/${reading.questions.length}`;
+  });
+}
+
+function setReadingAnswer(questionId, optionIndex) {
+  if (
+    !ui.readingDraft ||
+    !Number.isInteger(optionIndex) ||
+    optionIndex < 0
+  ) {
+    return;
+  }
+  ui.readingDraft.answers[questionId] = optionIndex;
+  document
+    .querySelectorAll(`[data-reading-question="${CSS.escape(questionId)}"]`)
+    .forEach((input) => {
+      input.checked = Number(input.dataset.optionIndex) === optionIndex;
+    });
+  updateQuestionCount();
+}
+
+function openQuestionSheet() {
+  const sheet = document.querySelector("#question-sheet");
+  const backdrop = document.querySelector(".question-sheet-backdrop");
+  if (!sheet || !backdrop) {
+    return;
+  }
+  ui.questionSheetScrollY = window.scrollY;
+  ui.questionSheetOpen = true;
+  document.body.classList.add("sheet-open");
+  backdrop.hidden = false;
+  sheet.hidden = false;
+}
+
+function closeQuestionSheet() {
+  const sheet = document.querySelector("#question-sheet");
+  const backdrop = document.querySelector(".question-sheet-backdrop");
+  if (sheet) {
+    sheet.hidden = true;
+  }
+  if (backdrop) {
+    backdrop.hidden = true;
+  }
+  ui.questionSheetOpen = false;
+  document.body.classList.remove("sheet-open");
+  window.scrollTo({ top: ui.questionSheetScrollY || 0, behavior: "auto" });
+}
+
+async function submitReadingFromSheet() {
+  await submitReading();
 }
 
 async function completeOpenReading() {
@@ -2709,6 +3191,9 @@ async function skipReading() {
   await putRecord(STORES.attempts, attempt);
   data.attempts.push(attempt);
   ui.readingStartedAt = null;
+  ui.readingDraft = null;
+  ui.questionSheetOpen = false;
+  document.body.classList.remove("sheet-open");
   render();
 }
 
@@ -2761,8 +3246,12 @@ async function finishSession(force = false) {
   ui.activeSession = null;
   ui.timer = null;
   ui.pendingGrade = null;
+  ui.spellFeedback = null;
   ui.readingFeedback = null;
   ui.readingStartedAt = null;
+  ui.readingDraft = null;
+  ui.questionSheetOpen = false;
+  document.body.classList.remove("sheet-open");
   ui.currentTaskId = null;
   ui.cardShownAt = null;
   await refreshData();
@@ -3305,6 +3794,14 @@ async function handleClick(event) {
     await confirmPendingWord();
     return;
   }
+  if (action === "finish-teach") {
+    await finishTeach();
+    return;
+  }
+  if (action === "continue-spell-wrong") {
+    await continueSpellWrong();
+    return;
+  }
   if (action === "toggle-batch-meanings") {
     ui.batchMeaningsVisible = !ui.batchMeaningsVisible;
     render();
@@ -3322,6 +3819,18 @@ async function handleClick(event) {
     speakWord(target.dataset.word || "");
     return;
   }
+  if (action === "open-question-sheet") {
+    openQuestionSheet();
+    return;
+  }
+  if (action === "close-question-sheet") {
+    closeQuestionSheet();
+    return;
+  }
+  if (action === "submit-reading-sheet") {
+    await submitReadingFromSheet();
+    return;
+  }
   if (action === "skip-reading") {
     await skipReading();
     return;
@@ -3335,6 +3844,9 @@ async function handleClick(event) {
     await saveReadingMemo(true);
     ui.readingFeedback = null;
     ui.readingStartedAt = null;
+    ui.readingDraft = null;
+    ui.questionSheetOpen = false;
+    document.body.classList.remove("sheet-open");
     render();
     return;
   }
@@ -3410,6 +3922,20 @@ async function handleClick(event) {
     }
     return;
   }
+  if (action === "check-update") {
+    if ("serviceWorker" in navigator) {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(
+        registrations.map((registration) => registration.unregister()),
+      );
+    }
+    if (window.caches) {
+      const keys = await caches.keys();
+      await Promise.all(keys.map((key) => caches.delete(key)));
+    }
+    window.location.reload();
+    return;
+  }
   if (action === "refresh-content") {
     if (!requireAdmin()) {
       return;
@@ -3430,6 +3956,13 @@ async function handleClick(event) {
 
 async function handleChange(event) {
   const target = event.target;
+  if (target.matches("[data-reading-question]")) {
+    setReadingAnswer(
+      target.dataset.readingQuestion,
+      Number(target.dataset.optionIndex),
+    );
+    return;
+  }
   if (target.matches('[data-action="change-energy"]')) {
     await saveEnergyState(target.value);
     return;
@@ -3527,6 +4060,11 @@ async function handleSubmit(event) {
     showToast("管理员密码已更新。");
     return;
   }
+  if (event.target.id === "spell-form") {
+    event.preventDefault();
+    await submitSpell(event.target);
+    return;
+  }
   if (event.target.id === "retry-choice-form") {
     event.preventDefault();
     submitRetryChoice(event.target);
@@ -3541,7 +4079,7 @@ async function handleSubmit(event) {
     return;
   }
   event.preventDefault();
-  await submitReading(event.target);
+  await submitReading();
 }
 
 function handleInput(event) {

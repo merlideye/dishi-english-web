@@ -1,4 +1,4 @@
-const CACHE_NAME = "danshi-english-v12";
+const CACHE_NAME = "danshi-english-v13";
 const APP_SHELL = [
   "./",
   "./index.html",

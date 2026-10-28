@@ -24,6 +24,11 @@ export function createWordState(wordId, now = Date.now()) {
     difficultyLevel: 5,
     consecutiveMisses: 0,
     hardFlag: false,
+    lastRating: null,
+    recognitionStreak: 0,
+    promotedToSpelling: false,
+    promotedAt: null,
+    spellingStreak: 0,
     firstSeenAt: now,
     lastReviewedAt: null,
     dueAt: now,
@@ -57,11 +62,14 @@ export function applyRating(
   rating,
   now = Date.now(),
   responseMs = null,
+  options = {},
 ) {
   if (!Object.values(RATINGS).includes(rating)) {
     throw new Error(`未知的单词评价：${rating}`);
   }
 
+  const mode = options.mode === "spell" ? "spell" : "recognize";
+  const promotable = options.promotable !== false;
   const state = {
     ...createWordState(previousState?.id || "", now),
     ...previousState,
@@ -70,6 +78,7 @@ export function applyRating(
   state.consecutiveMisses = state.consecutiveMisses || 0;
   state.attemptCount = (state.attemptCount || 0) + 1;
   state.lastReviewedAt = now;
+  state.lastRating = rating;
 
   if (rating === RATINGS.unknown) {
     state.unknownCount += 1;
@@ -112,6 +121,26 @@ export function applyRating(
     }
   }
 
+  if (mode === "recognize") {
+    if (rating === RATINGS.known) {
+      state.recognitionStreak = (state.recognitionStreak || 0) + 1;
+      if (
+        promotable &&
+        state.recognitionStreak >= 3 &&
+        !state.promotedToSpelling
+      ) {
+        state.promotedToSpelling = true;
+        state.promotedAt = now;
+      }
+    } else {
+      state.recognitionStreak = 0;
+    }
+  } else if (rating === RATINGS.known) {
+    state.spellingStreak = (state.spellingStreak || 0) + 1;
+  } else {
+    state.spellingStreak = 0;
+  }
+
   state.difficultyLevel = clamp(Math.ceil(state.difficultyScore), 1, 10);
   state.hardFlag = state.consecutiveMisses >= 3;
 
@@ -123,6 +152,14 @@ export function applyRating(
     state.intervalDays = Math.min(Math.max(1, state.intervalDays), 2);
   }
   state.dueAt = now + state.intervalDays * DAY_MS;
+  if (
+    mode === "recognize" &&
+    rating === RATINGS.known &&
+    state.promotedToSpelling
+  ) {
+    state.intervalDays = 1;
+    state.dueAt = now + DAY_MS;
+  }
   return state;
 }
 
@@ -130,16 +167,37 @@ export function isDue(wordState, now = Date.now()) {
   return !wordState || wordState.dueAt <= now;
 }
 
+export function reviewWeight(wordState, now = Date.now()) {
+  const base =
+    wordState.lastRating === RATINGS.unknown
+      ? 100
+      : wordState.lastRating === RATINGS.fuzzy
+        ? 60
+        : wordState.lastRating === RATINGS.known
+          ? 20
+          : 40;
+  const overdueDays = Math.max(
+    0,
+    (now - (wordState.dueAt || now)) / DAY_MS,
+  );
+  return (
+    base +
+    Math.min(7, overdueDays) * 4 +
+    (difficultyLevelOf(wordState) - 5) * 2 +
+    (wordState.hardFlag ? 10 : 0)
+  );
+}
+
 function sortReviewWords(wordStates, now) {
   return [...wordStates]
     .filter((state) => isDue(state, now))
     .sort((left, right) => {
-      const overdueDifference =
-        (now - right.dueAt) - (now - left.dueAt);
-      if (overdueDifference !== 0) {
-        return overdueDifference;
+      const weightDifference =
+        reviewWeight(right, now) - reviewWeight(left, now);
+      if (weightDifference !== 0) {
+        return weightDifference;
       }
-      return (right.lapses || 0) - (left.lapses || 0);
+      return (left.dueAt || 0) - (right.dueAt || 0);
     });
 }
 
@@ -156,6 +214,50 @@ function sortNewWords(words, knownIds) {
       const rightRank = right.frequencyRank || Number.MAX_SAFE_INTEGER;
       return leftRank - rightRank;
     });
+}
+
+export function wordBank(word) {
+  const skills =
+    Array.isArray(word?.skills) && word.skills.length
+      ? word.skills
+      : ["reading"];
+  const reads = skills.includes("reading");
+  const writes = skills.includes("writing");
+  if (reads && writes) {
+    return "shared";
+  }
+  if (writes) {
+    return "spelling";
+  }
+  return "reading";
+}
+
+export function cardModeFor(word, wordState) {
+  const bank = wordBank(word);
+  if (bank === "spelling") {
+    return wordState?.attemptCount ? "spell" : "recognize";
+  }
+  if (bank === "shared" && wordState?.promotedToSpelling) {
+    return "spell";
+  }
+  return "recognize";
+}
+
+function interleaveReviewAndNew(reviews, newWords) {
+  const result = [];
+  let reviewIndex = 0;
+  let newIndex = 0;
+  while (reviewIndex < reviews.length || newIndex < newWords.length) {
+    for (let index = 0; index < 2 && reviewIndex < reviews.length; index += 1) {
+      result.push(reviews[reviewIndex]);
+      reviewIndex += 1;
+    }
+    if (newIndex < newWords.length) {
+      result.push(newWords[newIndex]);
+      newIndex += 1;
+    }
+  }
+  return result;
 }
 
 export function buildPlan({
@@ -191,19 +293,50 @@ export function buildPlan({
     ? effectiveState === "energized" ? 20 : 16
     : counts.reviews;
 
+  const wordsById = new Map(words.map((word) => [word.id, word]));
   const knownIds = new Set(wordStates.map((wordState) => wordState.id));
-  const dueReviews = sortReviewWords(wordStates, now).slice(0, reviewLimit);
-  const newWords = sortNewWords(words, knownIds).slice(0, newLimit);
+  const dueReviews = sortReviewWords(wordStates, now);
 
-  const tasks = [
-    ...dueReviews.map((wordState) => ({
+  const recognizeReviews = [];
+  const spellingReviews = [];
+  for (const wordState of dueReviews) {
+    if (recognizeReviews.length + spellingReviews.length >= reviewLimit) {
+      break;
+    }
+    const word = wordsById.get(wordState.id);
+    const cardMode = cardModeFor(word, wordState);
+    const bank = wordBank(word);
+    const task = {
       id: wordState.id,
       mode: "review",
-    })),
-    ...newWords.map((word) => ({
+      cardMode,
+      bank,
+    };
+    if (cardMode === "spell") {
+      spellingReviews.push(task);
+    } else {
+      recognizeReviews.push(task);
+    }
+  }
+
+  const newWords = sortNewWords(words, knownIds)
+    .slice(0, newLimit)
+    .map((word) => ({
       id: word.id,
       mode: "new",
-    })),
+      cardMode: cardModeFor(word, null),
+      bank: wordBank(word),
+    }));
+
+  spellingReviews.sort((left, right) => {
+    const leftPriority = left.bank === "spelling" ? 2 : 1;
+    const rightPriority = right.bank === "spelling" ? 2 : 1;
+    return rightPriority - leftPriority;
+  });
+
+  const tasks = [
+    ...interleaveReviewAndNew(recognizeReviews, newWords),
+    ...spellingReviews,
   ];
 
   const readingNeeded = readingEligible && tasks.length < 34;
@@ -279,7 +412,12 @@ export function buildInitialQueue(tasks) {
     cardKey: `${task.id}:1`,
     wordId: task.id,
     mode: task.mode,
+    cardMode: task.cardMode || "recognize",
+    bank: task.bank || "reading",
+    source: task.source || null,
     attemptNumber: 1,
+    missCount: 0,
+    taught: false,
   }));
 }
 
@@ -319,13 +457,10 @@ export function advanceLearningQueue(
     ...currentItem,
     cardKey: `${currentItem.wordId}:${currentItem.attemptNumber + 1}`,
     attemptNumber: currentItem.attemptNumber + 1,
+    missCount: (currentItem.missCount || 0) + 1,
+    taught: false,
   };
-  const cardsBeforeRetry =
-    currentItem.attemptNumber >= 2
-      ? 2
-      : rating === RATINGS.unknown
-        ? 4
-        : 3;
+  const cardsBeforeRetry = rating === RATINGS.unknown ? 2 : 4;
   const insertionIndex = Math.min(cardsBeforeRetry, remaining.length);
   remaining.splice(insertionIndex, 0, nextItem);
 
