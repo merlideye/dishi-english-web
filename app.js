@@ -1518,50 +1518,74 @@ function renderWordCard(session, item) {
       : item.mode === "review"
         ? "到期复习"
         : "新词学习";
+  const cardKicker = `
+    <div class="session-kicker">
+      <span>${modeLabel}${word.studyDay ? ` · 第 ${word.studyDay} 天` : ""}</span>
+      <span class="difficulty-row">
+        ${difficultyMarkup(level, Boolean(state?.hardFlag))}
+        <span>${escapeHtml(bankLabel(word))}</span>
+      </span>
+    </div>
+  `;
+  const ratingButtons = Object.entries(RATING_LABELS)
+    .map(
+      ([rating, label]) => `
+        <button
+          class="rating-button ${selected === rating ? "selected" : ""}"
+          data-action="rate-word"
+          data-rating="${rating}"
+          aria-pressed="${selected === rating}"
+        >
+          ${label}
+        </button>
+      `,
+    )
+    .join("");
+
+  if (!pending) {
+    return `
+      <article class="session-card word-card word-card-front" data-card-key="${escapeHtml(item.cardKey)}">
+        ${cardKicker}
+        <div class="word-head">
+          <h2 class="word-text">${escapeHtml(word.word)}</h2>
+          <div class="phonetic-row">
+            <p class="phonetic">/${escapeHtml(word.phonetic)}/</p>
+            <button class="speak-button" type="button" data-action="speak-word" data-word="${escapeHtml(word.word)}" title="朗读单词">▶</button>
+          </div>
+        </div>
+        <p class="word-prompt">先自己回想，再选一个；选完翻面看释义。</p>
+        <div class="rating-grid rating-grid-front" role="group" aria-label="熟悉度评价">
+          ${ratingButtons}
+        </div>
+        <p class="rating-hint">三个按钮都会翻面；翻面后还能改。</p>
+      </article>
+    `;
+  }
 
   return `
-    <article class="session-card word-card" data-card-key="${escapeHtml(item.cardKey)}">
-      <div class="session-kicker">
-        <span>${modeLabel}${word.studyDay ? ` · 第 ${word.studyDay} 天` : ""}</span>
-        <span class="difficulty-row">
-          ${difficultyMarkup(level, Boolean(state?.hardFlag))}
-          <span>${escapeHtml(bankLabel(word))}</span>
-        </span>
-      </div>
-      <div class="word-head">
+    <article class="session-card word-card word-card-back" data-card-key="${escapeHtml(item.cardKey)}">
+      ${cardKicker}
+      <div class="word-head word-head-compact">
         <h2 class="word-text">${escapeHtml(word.word)}</h2>
         <div class="phonetic-row">
           <p class="phonetic">/${escapeHtml(word.phonetic)}/</p>
           <button class="speak-button" type="button" data-action="speak-word" data-word="${escapeHtml(word.word)}" title="朗读单词">▶</button>
         </div>
       </div>
-      <button class="primary-button confirm-word" data-action="confirm-word-rating" ${selected ? "" : "disabled"}>
-        确认并继续
-      </button>
       <div class="word-meaning">
         <span class="meaning-label">中文释义</span>
         <p class="answer-meaning">${multiline(word.meaning)}</p>
       </div>
       <div class="rating-grid" role="group" aria-label="熟悉度评价">
-        ${Object.entries(RATING_LABELS)
-          .map(
-            ([rating, label]) => `
-              <button
-                class="rating-button ${selected === rating ? "selected" : ""}"
-                data-action="rate-word"
-                data-rating="${rating}"
-                aria-pressed="${selected === rating}"
-              >
-                ${label}
-              </button>
-            `,
-          )
-          .join("")}
+        ${ratingButtons}
       </div>
+      <button class="primary-button confirm-word" data-action="confirm-word-rating">
+        确认并继续
+      </button>
       <p class="rating-hint">
-        ${selected ? `已选“${RATING_LABELS[selected]}”，点上面的确认继续。` : "先点一个评价，确认按钮才会亮。"}
+        已选“${RATING_LABELS[selected]}”。要改就点别的评价，确认后进入下一词。
       </p>
-      ${wordExtraMarkup(word, state, level, Boolean(selected))}
+      ${wordExtraMarkup(word, state, level, true)}
     </article>
   `;
 }
@@ -2587,7 +2611,7 @@ function updateWordCardSelection(cardKey, rating) {
   }
   const hint = card.querySelector(".rating-hint");
   if (hint) {
-    hint.textContent = `已选“${RATING_LABELS[rating]}”，点上面的确认继续。`;
+    hint.textContent = `已选“${RATING_LABELS[rating]}”。要改就点别的评价，确认后进入下一词。`;
   }
 }
 
@@ -2602,7 +2626,8 @@ function beginWordRating(rating) {
     return;
   }
 
-  if (ui.pendingGrade?.item?.cardKey === item.cardKey) {
+  const firstSelection = ui.pendingGrade?.item?.cardKey !== item.cardKey;
+  if (!firstSelection) {
     ui.pendingGrade.rating = rating;
   } else {
     ui.pendingGrade = {
@@ -2611,6 +2636,11 @@ function beginWordRating(rating) {
       rating,
       responseMs: Math.max(0, Date.now() - (ui.cardShownAt || Date.now())),
     };
+  }
+  if (firstSelection) {
+    render();
+    window.scrollTo({ top: 0, behavior: "auto" });
+    return;
   }
   updateWordCardSelection(item.cardKey, rating);
 }

@@ -2322,6 +2322,43 @@ select:focus-visible {
   transform: none;
 }
 
+.word-card-front {
+  min-height: 430px;
+}
+
+.word-card-front .word-head {
+  padding-top: 18px;
+}
+
+.word-card-front .word-prompt {
+  margin: 14px 0 18px;
+  text-align: center;
+}
+
+.word-card-front .rating-grid {
+  margin-top: 0;
+}
+
+.word-card-back .word-head {
+  padding: 0 0 6px;
+}
+
+.word-card-back .word-head .word-text {
+  font-size: clamp(30px, 9vw, 40px);
+}
+
+.word-card-back .word-meaning {
+  margin-top: 4px;
+}
+
+.word-card-back .confirm-word {
+  margin: 12px auto 0;
+}
+
+.word-card-back .rating-hint {
+  margin-top: 8px;
+}
+
 .word-meaning {
   max-width: 620px;
   margin: 0 auto;
